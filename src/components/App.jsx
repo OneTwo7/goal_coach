@@ -1,19 +1,33 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { Route, NavLink, withRouter } from 'react-router-dom';
+import firebaseApp from '../firebase';
+import Home from './Home';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 class App extends React.Component {
+  componentDidMount () {
+    firebaseApp.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('User signed in or up', user);
+        this.props.history.push('/');
+      } else {
+        console.log('User signed out or still needs to sign in');
+        this.props.history.push('/signin');
+      }
+    });
+  }
+
   render () {
     return (
       <div>
-        <h1>App</h1>
+        <NavLink exact to="/">Home</NavLink>
+        {" | "}
         <NavLink to="/signin">Sign In</NavLink>
         {" | "}
         <NavLink to="/signup">Sign Up</NavLink>
 
-
+        <Route exact path="/" component={Home} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
       </div>
@@ -21,4 +35,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

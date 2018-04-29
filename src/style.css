@@ -3,3 +3,11 @@
   width: 60%;
   margin: 0 auto;
 }
+
+.active {
+  color: #faa500;
+}
+
+.form-inline input, .form-inline button {
+  margin: .25rem;
+}

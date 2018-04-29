@@ -1,11 +1,8 @@
 import React from 'react';
+import Form from './Form';
 
-class SignIn extends React.Component {
-  render () {
-    return (
-      <div>SignIn</div>
-    );
-  }
-}
+const SignIn = () => (
+  <Form key="signin" type="Sign In" />
+);
 
 export default SignIn;
