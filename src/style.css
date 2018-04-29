@@ -11,3 +11,11 @@
 .form-inline input, .form-inline button {
   margin: .25rem;
 }
+
+#goals {
+  margin-bottom: 15px;
+}
+
+.goal {
+  margin-bottom: .5rem;
+}

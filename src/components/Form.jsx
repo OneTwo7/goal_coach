@@ -1,5 +1,5 @@
 import React from 'react';
-import firebaseApp from '../firebase';
+import { firebaseApp } from '../firebase';
 
 class Form extends React.Component {
   constructor (props) {
