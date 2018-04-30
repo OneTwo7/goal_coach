@@ -1,41 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setGoals } from '../actions';
-import { goalRef } from '../firebase';
+import { goalRef, completeGoalRef } from '../firebase';
+import GoalItem from './GoalItem';
 
 class GoalList extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.completeGoal = this.completeGoal.bind(this);
+  }
+
   componentDidMount () {
     goalRef.on('value', snap => {
       let goals = [];
       snap.forEach(goal => {
         const { email, title } = goal.val();
-        goals.push({ email, title });
+        const serverKey = goal.key;
+        goals.push({ email, title, serverKey });
       });
       this.props.setGoals(goals);
     });
   }
 
-  renderGoals () {
-    return this.props.goals.map(({ email, title }, idx) => (
-      <div key={idx} className="goal">
-        <div>Email: {email}</div>
-        <div>Goal: {title}</div>
-      </div>
-    ));
+  completeGoal (title, serverKey) {
+    const { email } = this.props.auth;
+    goalRef.child(serverKey).remove();
+    completeGoalRef.push({ email, title });
   }
 
   render () {
     return (
       <div id="goals">
-        {this.renderGoals()}
+        {
+          this.props.goals.map((goal, idx) => (
+            <GoalItem key={idx} goal={goal} completeGoal={this.completeGoal} />
+          ))
+        }
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { goals } = state;
+  const { auth, goals } = state;
   return {
+    auth,
     goals
   };
 };

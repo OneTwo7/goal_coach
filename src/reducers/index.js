@@ -1,4 +1,4 @@
-import { SIGNED_IN, SET_GOALS } from '../constants';
+import { SIGNED_IN, SET_GOALS, SET_COMPLETE_GOALS } from '../constants';
 import { combineReducers } from 'redux';
 
 let user = {
@@ -6,29 +6,32 @@ let user = {
 };
 
 const auth = (state = user, action) => {
-  switch (action.type) {
-    case SIGNED_IN:
-      const { email } = action;
-      user = {
-        email
-      };
-      return user;
-    default:
-      return state;
+  if (action.type === SIGNED_IN) {
+    const { email } = action;
+    user = { email };
+    return user;
   }
+  return state;
 };
 
 const goals = (state = [], action) => {
-  switch (action.type) {
-    case SET_GOALS:
-      const { goals } = action;
-      return goals;
-    default:
-      return state;
+  if (action.type === SET_GOALS) {
+    const { goals } = action;
+    return goals;
   }
+  return state;
+};
+
+const completeGoals = (state = [], action) => {
+  if (action.type === SET_COMPLETE_GOALS) {
+    const { goals } = action;
+    return goals;
+  }
+  return state;
 };
 
 export default combineReducers({
   auth,
-  goals
+  goals,
+  completeGoals
 });

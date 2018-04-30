@@ -39,11 +39,4 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log('state', state);
-  return {
-    user: state
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { logUser })(App));
+export default withRouter(connect(null, { logUser })(App));

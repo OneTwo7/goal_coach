@@ -26,9 +26,9 @@ class AddGoal extends React.Component {
   }
 
   submit () {
-    console.log('this.state', this.state);
     const { email } = this.props;
     const { title } = this.state;
+    this.setState({ title: '' });
     goalRef.push({ email, title });
   }
 

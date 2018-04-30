@@ -1,7 +1,7 @@
 #root {
   max-width: 850px;
   width: 60%;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 
 .active {
@@ -16,6 +16,24 @@
   margin-bottom: 15px;
 }
 
-.goal {
+#complete-goals {
+  margin-bottom: 15px;
+}
+
+.goal, .complete-goal {
+  display: flex;
+  align-items: center;
   margin-bottom: .5rem;
+}
+
+.goal strong, .complete-goal strong {
+  flex: 1 1;
+}
+
+.goal span, .complete-goal span {
+  margin-left: 1rem;
+}
+
+.goal button {
+  margin-left: 1rem;
 }
